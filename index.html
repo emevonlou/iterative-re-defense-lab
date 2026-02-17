@@ -1,0 +1,148 @@
+<!doctype html>
+<html lang="pt-br">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Iterative RE Defense Lab</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<div class="app" id="app">
+  <header class="topbar">
+    <div class="brand">
+      <div class="logo">⟠</div>
+      <div class="titles">
+        <div class="title">Iterative RE Defense Lab</div>
+        <div class="subtitle">Reverse engineering workflow • senior interface • demo/simulated metrics</div>
+      </div>
+    </div>
+    
+    <div class="controls">
+      <button class="btn" id="btnPrev" title="Iteration back">← Prev</button>
+      <button class="btn primary" id="btnNext" title="Iteration forward">Next →</button>
+      <button class="btn ghost" id="btnAuto" title="Autoplay">Autoplay</button>
+      <button class="btn ghost" id="btnReset" title="Reset">Reset</button>
+    </div>
+  </header>
+
+  <main class="grid">
+    <!-- Left: iteration timeline + metrics -->
+    <section class="panel">
+      <div class="panelHead">
+        <div class="panelTitle">Iteration Timeline (Simulated)</div>
+        <div class="pill" id="pillMode">manual</div>
+      </div>
+
+      <ol class="timeline" id="timeline"></ol>
+
+      <div class="metrics">
+        <div class="metric">
+          <div class="k">Risk (demo)</div>
+          <div class="v" id="mRisk">—</div>
+          <div class="bar"><span id="bRisk"></span></div>
+        </div>
+
+        <div class="metric">
+          <div class="k">Detection (demo)</div>
+          <div class="v" id="mDetect">—</div>
+          <div class="bar"><span id="bDetect"></span></div>
+        </div>
+
+        <div class="metric">
+          <div class="k">Blast radius (demo)</div>
+          <div class="v" id="mBlast">—</div>
+          <div class="bar"><span id="bBlast"></span></div>
+        </div>
+
+        <div class="metric">
+          <div class="k">Friction (demo)</div>
+          <div class="v" id="mFriction">—</div>
+          <div class="bar"><span id="bFriction"></span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Middle: main card -->
+    <section class="panel hero">
+      <div class="panelHead">
+        <div class="panelTitle">Focus</div>
+        <div class="pill" id="pillIter">iter 0</div>
+      </div>
+
+      <div class="focus">
+        <div class="focusTop">
+          <div>
+            <div class="h1" id="fTitle">—</div>
+            <div class="desc" id="fDesc">—</div>
+          </div>
+
+          <div class="score">
+            <div class="scoreLabel">Score (sim)</div>
+            <div class="scoreValue" id="fScore">—</div>
+          </div>
+        </div>
+
+        <div class="split">
+          <div class="card">
+            <div class="cardTitle">Threat Model Snapshot</div>
+            <ul class="list" id="tmList"></ul>
+          </div>
+
+          <div class="card">
+            <div class="cardTitle">Defensive Moves (iterative)</div>
+            <ul class="list" id="dmList"></ul>
+          </div>
+        </div>
+
+        <div class="ctaRow">
+          <button class="btn primary" id="btnInject">Inject event</button>
+          <button class="btn" id="btnDecision">Run decision</button>
+          <div class="hint" id="hint">Tip: iterate → collect → prove → codify into detections.</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Right: terminal -->
+    <section class="panel term">
+      <div class="panelHead">
+        <div class="panelTitle">Telemetry / Logs (Simulated)</div>
+        <div class="pill sim" id="pillHealth">simulated</div>
+      </div>
+
+      <div class="terminal" id="terminal" aria-label="security terminal output"></div>
+
+      <div class="termFoot">
+        <div class="toggle">
+          <input type="checkbox" id="chkTimestamps" checked />
+          <label for="chkTimestamps">timestamps</label>
+        </div>
+        <div class="toggle">
+          <input type="checkbox" id="chkNoise" />
+          <label for="chkNoise">noise</label>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="foot">
+  <div class="footLeft">
+    <span class="tag">Mode:</span>
+    <span>Conceptual Simulation • Demo metrics • No host telemetry collected</span>
+  </div>
+
+  <div class="footCenter">
+  <span class="tag">Built by:</span>
+  <span class="creditName">Ellie • <span id="year"></span></span>
+  </div>
+
+
+  <div class="footRight">
+    <span class="tag">Keys:</span>
+    <span>←/→ iterate</span> · <span>Space autoplay</span> · <span>R reset</span>
+  </div>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
