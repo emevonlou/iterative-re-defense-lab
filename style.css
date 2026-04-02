@@ -458,4 +458,8 @@ body{
   font-weight: 700;
 }
 
-
+.mental-model {
+  margin-top: 10px;
+  font-style: italic;
+  opacity: 0.9;
+}

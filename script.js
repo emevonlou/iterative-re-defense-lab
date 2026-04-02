@@ -262,8 +262,7 @@ function renderFocus() {
   el.pillIter.textContent = `iter ${state.i}`;
   el.fTitle.textContent = it.title;
   el.fDesc.textContent = it.desc;
-  el.mm.textContent = it.mental;
-
+  if (el.mm) el.mm.textContent = it.mental;
   state.score = clamp(
     55 + iters.slice(0, state.i + 1).reduce((acc, x) => acc + (x.delta?.score ?? 0), 0),
     0,
