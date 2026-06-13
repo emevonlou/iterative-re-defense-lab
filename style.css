@@ -463,3 +463,19 @@ body{
   font-style: italic;
   opacity: 0.9;
 }
+.profile-card {
+  margin-top: 16px;
+  padding: 14px;
+  border: 1px solid rgba(255,255,255,.12);
+  border-radius: 14px;
+  background: rgba(255,255,255,.035);
+}
+
+.profile-card h3 {
+  margin-top: 0;
+}
+
+.profile-card p {
+  margin: 6px 0;
+  opacity: .9;
+}

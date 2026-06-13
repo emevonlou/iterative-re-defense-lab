@@ -6,7 +6,10 @@ const state = {
   timer: null,
   showTS: true,
   noise: false,
-  score: 55
+  score: 55,
+  xp: 0,
+  completed: 0,
+  bestScore: 0
 };
 
 const iters = [
@@ -156,6 +159,52 @@ const el = {
   btnDecision: $("#btnDecision"),
   hint: $("#hint")
 };
+
+function loadProfile() {
+  const saved = localStorage.getItem("reDefenseProfile");
+
+  if (!saved) return;
+
+  const profile = JSON.parse(saved);
+
+  state.xp = profile.xp || 0;
+  state.completed = profile.completed || 0;
+  state.bestScore = profile.bestScore || 0;
+}
+
+function saveProfile() {
+  localStorage.setItem(
+    "reDefenseProfile",
+    JSON.stringify({
+      xp: state.xp,
+      completed: state.completed,
+      bestScore: state.bestScore
+    })
+  );
+}
+
+function getLevel(xp) {
+  if (xp >= 1000) return "Level 5 - Resilience";
+  if (xp >= 700) return "Level 4 - Defense";
+  if (xp >= 400) return "Level 3 - Verification";
+  if (xp >= 150) return "Level 2 - Analysis";
+
+  return "Level 1 - Observation";
+}
+
+function renderProfile() {
+  const levelEl = document.getElementById("profileLevel");
+  const xpEl = document.getElementById("profileXp");
+  const completedEl = document.getElementById("profileCompleted");
+  const bestEl = document.getElementById("profileBest");
+
+  if (!levelEl || !xpEl || !completedEl || !bestEl) return;
+
+  levelEl.textContent = getLevel(state.xp);
+  xpEl.textContent = `XP: ${state.xp}`;
+  completedEl.textContent = `Completed: ${state.completed}`;
+  bestEl.textContent = `Best Score: ${state.bestScore}`;
+}
 
 function clamp(n, a = 0, b = 100) {
   return Math.max(a, Math.min(b, n));
@@ -346,6 +395,16 @@ function runDecision() {
   const nud = verdict > 58 ? -1 : verdict > 38 ? +2 : +3;
   state.score = clamp(state.score + nud, 0, 100);
   el.fScore.textContent = String(state.score).padStart(2, "0");
+  state.completed += 1;
+  state.xp += 25;
+
+  if (state.score > state.bestScore) {
+  state.bestScore = state.score;
+}
+
+  renderProfile();
+  saveProfile();
+
 }
 
 function setIter(idx) {
@@ -435,4 +494,7 @@ window.addEventListener("keydown", (e) => {
 const yearEl = document.getElementById("year");
 if (yearEl) yearEl.textContent = new Date().getFullYear();
 
+loadProfile();
+renderProfile();
 resetAll();
+renderProfile();
